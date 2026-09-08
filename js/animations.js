@@ -99,124 +99,13 @@ const fixFloatingElements = () => {
 const reviews = [
     // Real clients you've worked with
     {
-        text: "Mzuri Organics was built   comprehensively as an  e-commerce platform that transformed how we sell our organic fertilizers. Farmers can now easily order VermiFrass and BioVeg Plus online. Our online sales have increased by 180% in just 3 months. The integration with M-Pesa was seamless!",
+        text: "We simply deliver the best digital solutions. Marubi-Labs is our go-to for all things tech.",
         rating: 5,
         client: "James Mwangi",
         company: "Mzuri Organics",
         role: "Operations Director"
     },
-    {
-        text: "Marubi-Labs created an intuitive learning platform that's genuinely changing children's lives. The UI is so simple that kids as young as 7 can navigate it independently. We've reached over 5,000 students in underprivileged areas through this platform.",
-        rating: 5,
-        client: "Sarah Wanjiku",
-        company: "Mind-Bridge Foundation",
-        role: "Program Director"
-    },
-    {
-        text: "They built us a custom e-commerce site with M-Pesa integration that increased our conversion rate by 200%. The dashboard gives us real-time analytics and inventory management. Best investment we've made this year.",
-        rating: 5,
-        client: "David Omondi",
-        company: "GreenHarvest Kenya",
-        role: "Founder"
-    },
-    {
-        text: "I needed a professional portfolio that would stand out to international clients. Marubi-Labs delivered a stunning, fast-loading site that perfectly captures my brand. I've gotten three client inquiries in the first week!",
-        rating: 5,
-        client: "Akinyi Odhiambo",
-        company: "Creative Studio",
-        role: "Photographer"
-    },
-    {
-        text: "The team rebuilt our entire corporate website with modern Angular framework. Page load times dropped from 5 seconds to under 1 second. Our SEO rankings have improved dramatically.",
-        rating: 5,
-        client: "Peter Kipchoge",
-        company: "East African Logistics",
-        role: "Marketing Manager"
-    },
-    {
-        text: "Marubi-Labs developed a property listing platform with advanced search filters, virtual tour integration, and automated inquiry system. It's transformed how we showcase properties to potential buyers.",
-        rating: 5,
-        client: "Lucy Njeri",
-        company: "Prime Properties KE",
-        role: "Director"
-    },
-    {
-        text: "They built us a complete school management system with parent portals, grade tracking, and fee payment integration. Our administrative workload has reduced by 60%.",
-        rating: 5,
-        client: "Dr. Otieno",
-        company: "Kisumu International School",
-        role: "Principal"
-    },
-    {
-        text: "Marubi-Labs conducted a thorough security audit of our banking systems and discovered critical vulnerabilities we hadn't identified. Their detailed report and remediation guidance were invaluable.",
-        rating: 5,
-        client: "Michael Njoroge",
-        company: "Safaricom",
-        role: "Security Engineer"
-    },
-    {
-        text: "The cybersecurity workshop Marubi-Labs facilitated for our team was eye-opening. They covered real-world attack vectors and practical defense strategies. Our employees now recognize phishing attempts.",
-        rating: 5,
-        client: "Grace Mumbi",
-        company: "KCB Bank",
-        role: "IT Manager"
-    },
-    {
-        text: "After experiencing a breach, we hired Marubi-Labs to harden our network infrastructure. They implemented proper firewall rules, intrusion detection systems, and conducted employee security awareness training. No incidents since.",
-        rating: 5,
-        client: "John Kariuki",
-        company: "Nairobi Hospital",
-        role: "Head of IT"
-    },
-    {
-        text: "Marubi-Labs performed a comprehensive security assessment of our e-commerce platform and found multiple OWASP Top 10 vulnerabilities. Their fixes were implemented quickly and our payment gateway is now PCI compliant.",
-        rating: 5,
-        client: "Faith Akinyi",
-        company: "ShopKE Online",
-        role: "CTO"
-    },
-    {
-        text: "The hands-on cybersecurity workshop at Marubi-Labs gave me practical experience in ethical hacking and penetration testing. I went from theory to actually exploiting vulnerabilities in a controlled environment. Landed my first security job because of this experience.",
-        rating: 5,
-        client: "Brian Otieno",
-        company: "Cybersecurity Student",
-        role: "Former Intern"
-    },
-    {
-        text: "Marubi-Labs delivered our project two weeks ahead of schedule and under budget. The code is clean, well-documented, and scalable. Their communication throughout the process was excellent.",
-        rating: 5,
-        client: "Anne Wairimu",
-        company: "TechStart Africa",
-        role: "Project Manager"
-    },
-    {
-        text: "We needed to integrate multiple third-party APIs including M-Pesa, PayPal, and various payment gateways. Marubi-Labs handled it flawlessly. The integration is robust and handles edge cases we hadn't even considered.",
-        rating: 5,
-        client: "Samuel Muthui",
-        company: "FinTech Solutions",
-        role: "Lead Developer"
-    },
-    {
-        text: "Our database queries were taking 30+ seconds and our application was slowing down. Marubi-Labs optimized our indexes, restructured inefficient queries, and implemented caching. Now the same queries run in under 3 seconds.",
-        rating: 5,
-        client: "Catherine Mwende",
-        company: "DataFlow Analytics",
-        role: "Data Architect"
-    },
-    {
-        text: "The user experience on our platform was confusing and users were dropping off. Marubi-Labs completely redesigned the interface with user testing and modern design principles. User engagement increased by 150% after the redesign.",
-        rating: 5,
-        client: "Francis Kamau",
-        company: "EduTech Kenya",
-        role: "Product Manager"
-    },
-    {
-        text: "Marubi-Labs built our cross-platform mobile app using Flutter. It runs smoothly on both Android and iOS, and users love the intuitive design. We've had 10,000+ downloads in the first month.",
-        rating: 5,
-        client: "Esther Mueni",
-        company: "AgriConnect",
-        role: "Founder"
-    }
+ 
 ];
 
 // Make reviews globally available

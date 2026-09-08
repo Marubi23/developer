@@ -7,7 +7,7 @@
     padding: 1.2rem 2rem !important;
     z-index: 1000 !important;
     transition: transform 0.3s ease, background 0.3s ease, padding 0.3s ease !important;
-    background: transparent !important;
+    background: red !important;
     backdrop-filter: none !important;
 }
 
