@@ -3,59 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Primary Meta Tags -->
     <title>Services | Felix Marubi - Full‑Stack & Cybersecurity</title>
     <meta name="title" content="Services | Felix Marubi - Full‑Stack & Cybersecurity">
     <meta name="description" content="Premium full‑stack development & cybersecurity. Kenyan & global rates. Transparent ranges, negotiation friendly. Nothing is too hard.">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Services | Felix Marubi - Full‑Stack & Cybersecurity">
     <meta property="og:description" content="Premium full‑stack development & cybersecurity. Kenyan & global rates.">
-    
+
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- CSS -->
-    <link rel="stylesheet" href="css/pages/home.css">
-    <link rel="stylesheet" href="css/pages/services.css">
-    
- 
+    <link rel="stylesheet" href="css/pages/home.css?v=20260908">
+    <link rel="stylesheet" href="css/pages/services.css?v=20260908">
 </head>
 <body>
-    <!-- Navigation (fixed navbar) -->
-   <!-- Navigation - Same structure as workshop page -->
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="index.html" class="logo">
-            <span class="logo-text">MARUBI-LABS</span>
-        </a>
-        
-        <div class="nav-menu">
-            <a href="index.html" class="nav-link"><span>Home</span></a>
-            <a href="origin.html" class="nav-link"><span>Origin</span></a>
-            <a href="arsenal.html" class="nav-link"><span>Arsenal</span></a>
-            <a href="workshop.html" class="nav-link"><span>Workshop</span></a>
-            <a href="vision.html" class="nav-link"><span>Vision</span></a>
-            <a href="connect.html" class="nav-link"><span>Connect</span></a>
-            <a href="resume.html" class="nav-link active"><span>Resume</span></a>
-            <a href="services.html" class="nav-link"><span>Pricing</span></a>
-            <a href="navigation.html" class="nav-link">Explore</a>
-        </div>
-        
-        <div class="nav-actions">
-            <a href="navigation.html" class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+    <!-- Navigation: same 3 tabs as every page — Home, Services, Resume -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">MARUBI-LABS</span>
             </a>
+
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link" data-tab="home">Home</a>
+                <a href="services.html" class="nav-link active" data-tab="services">Services</a>
+                <a href="resume.html" class="nav-link" data-tab="resume">Resume</a>
+            </div>
         </div>
-    </div>
-    <div class="scroll-progress" id="scrollProgress"></div>
-</nav>
+    </nav>
+
+    <!-- Mobile bottom tab bar (glassmorphism) -->
+    <nav class="bottom-nav" id="bottomNav" aria-label="Primary">
+        <a href="index.html" class="bottom-nav-link" data-tab="home">
+            <span class="bottom-nav-icon"><i class="fas fa-house"></i></span>
+            <span class="bottom-nav-label">Home</span>
+        </a>
+        <a href="services.html" class="bottom-nav-link active" data-tab="services">
+            <span class="bottom-nav-icon"><i class="fas fa-layer-group"></i></span>
+            <span class="bottom-nav-label">Services</span>
+        </a>
+        <a href="resume.html" class="bottom-nav-link" data-tab="resume">
+            <span class="bottom-nav-icon"><i class="fas fa-user"></i></span>
+            <span class="bottom-nav-label">Resume</span>
+        </a>
+    </nav>
+
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
@@ -63,15 +64,10 @@
                 <h1 class="page-title">
                     Premium <span class="ember">Services</span>
                 </h1>
-                <p class="page-subtitle">
-                 
-                </p>
+                <p class="page-subtitle"></p>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <span>Explore</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
+     
     </section>
 
     <!-- Currency Toggle (premium glass) -->
@@ -119,7 +115,6 @@
             </div>
 
             <div class="services-grid">
-                <!-- Basic Business Site -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in">
                     <div class="service-icon"><i class="fas fa-building"></i></div>
                     <h3>Basic Business Site</h3>
@@ -129,7 +124,6 @@
                     </div>
                 </div>
 
-                <!-- E‑commerce Platform -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="100">
                     <div class="service-icon"><i class="fas fa-store"></i></div>
                     <h3>E‑commerce Platform</h3>
@@ -139,7 +133,6 @@
                     </div>
                 </div>
 
-                <!-- Custom Web App -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="200">
                     <div class="service-icon"><i class="fas fa-cubes"></i></div>
                     <h3>Custom Web App</h3>
@@ -149,7 +142,6 @@
                     </div>
                 </div>
 
-                <!-- Redesign / Revamp -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="300">
                     <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
                     <h3>Redesign / Revamp</h3>
@@ -159,7 +151,6 @@
                     </div>
                 </div>
 
-                <!-- API Integration -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="400">
                     <div class="service-icon"><i class="fas fa-plug"></i></div>
                     <h3>API Integration</h3>
@@ -169,7 +160,6 @@
                     </div>
                 </div>
 
-                <!-- PWA / mobile web -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="500">
                     <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
                     <h3>PWA / Mobile Web</h3>
@@ -191,7 +181,6 @@
             </div>
 
             <div class="services-grid">
-                <!-- Monthly Maintenance -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in">
                     <div class="service-icon"><i class="fas fa-sync-alt"></i></div>
                     <h3>Monthly Maintenance</h3>
@@ -201,7 +190,6 @@
                     </div>
                 </div>
 
-                <!-- Technical Support (hourly) -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="100">
                     <div class="service-icon"><i class="fas fa-clock"></i></div>
                     <h3>Technical Support</h3>
@@ -211,7 +199,6 @@
                     </div>
                 </div>
 
-                <!-- Emergency Fixes -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="200">
                     <div class="service-icon"><i class="fas fa-bug"></i></div>
                     <h3>Emergency Fixes</h3>
@@ -221,7 +208,6 @@
                     </div>
                 </div>
 
-                <!-- SEO / Speed Boost -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="300">
                     <div class="service-icon"><i class="fas fa-chart-line"></i></div>
                     <h3>SEO / Speed Boost</h3>
@@ -243,7 +229,6 @@
             </div>
 
             <div class="services-grid">
-                <!-- Security Audit -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in">
                     <div class="service-icon"><i class="fas fa-search"></i></div>
                     <h3>Website Security Audit</h3>
@@ -253,7 +238,6 @@
                     </div>
                 </div>
 
-                <!-- Penetration Testing -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="100">
                     <div class="service-icon"><i class="fas fa-user-secret"></i></div>
                     <h3>Penetration Testing</h3>
@@ -263,7 +247,6 @@
                     </div>
                 </div>
 
-                <!-- Security Monitoring -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="200">
                     <div class="service-icon"><i class="fas fa-eye"></i></div>
                     <h3>Security Monitoring Setup</h3>
@@ -273,7 +256,6 @@
                     </div>
                 </div>
 
-                <!-- Malware Removal -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="300">
                     <div class="service-icon"><i class="fas fa-lock"></i></div>
                     <h3>Malware Removal</h3>
@@ -283,7 +265,6 @@
                     </div>
                 </div>
 
-                <!-- SSL / Secure Config -->
                 <div class="service-card animate-on-scroll" data-animate="fade-in" data-delay="400">
                     <div class="service-icon"><i class="fas fa-key"></i></div>
                     <h3>SSL / Secure Config</h3>
@@ -305,9 +286,8 @@
             </div>
 
             <div class="packages-grid">
-                <!-- Starter Package -->
                 <div class="package-card animate-on-scroll" data-animate="fade-in">
-                    <div class="package-name">🚀 Starter</div>
+                    <div class="package-name"> Starter</div>
                     <div class="package-price">
                         <span class="price-range" data-kes="25000" data-usd="210">KES 25,000</span>
                     </div>
@@ -320,7 +300,6 @@
                     </ul>
                 </div>
 
-                <!-- Business Package -->
                 <div class="package-card animate-on-scroll" data-animate="fade-in" data-delay="150">
                     <div class="package-name">Business</div>
                     <div class="package-price">
@@ -335,7 +314,6 @@
                     </ul>
                 </div>
 
-                <!-- Enterprise Package -->
                 <div class="package-card animate-on-scroll" data-animate="fade-in" data-delay="300">
                     <div class="package-name"> Enterprise</div>
                     <div class="package-price">
@@ -387,7 +365,7 @@
             <div class="cta-card">
                 <h2>Ready to Build Something?</h2>
                 <p>One message could be the start of something legendary.</p>
-                <a href="connect.html" class="btn btn-primary btn-large">
+                <a href="index.html#contact-section" class="btn btn-primary btn-large">
                     <i class="fas fa-paper-plane"></i>
                     Send a Message
                 </a>
@@ -412,26 +390,25 @@
                         <a href="https://www.instagram.com/marubi___/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Navigate</h3>
                     <ul>
-                        <li><a href="origin.html">Origin</a></li>
-                        <li><a href="arsenal.html">Arsenal</a></li>
-                        <li><a href="workshop.html">Workshop</a></li>
-                        <li><a href="vision.html">Vision</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resume.html">Resume</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Companies</h3>
                     <ul>
                         <li><a href="https://mind-bridge.co.ke" target="_blank">Mindbridge</a></li>
-                        <li><a href="https://mzuri-organics.co.ke" target="_blank">Mzuri Organics</a></li>
+                        <li><a href="https://mzuriorganics.co.ke" target="_blank">Mzuri Organics</a></li>
                         <li><a href="#">Marubi-Labs</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Connect</h3>
                     <ul>
@@ -441,9 +418,9 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                <p>© 2025 MARUBI-LABS · Built with <i class="fas fa-heart" style="color: #cc2f01;"></i> in Kenya · CEO: 20 · For the future</p>
+                <p>© 2026 MARUBI-LABS · Built with <i class="fas fa-heart" style="color: #cc2f01;"></i> in Kenya · CEO: 20 · For the future</p>
             </div>
         </div>
     </footer>
@@ -453,40 +430,22 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- JavaScript -->
+    <!-- Shared behavior: navbar scroll state, active-tab highlighting, back-to-top -->
+    <script src="js/main.js?v=20260908"></script>
+
+    <!-- Page-specific: currency toggle + scroll-reveal animations -->
     <script>
-        // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const navMenu = document.getElementById('navMenu');
-            
-            if (menuToggle && navMenu) {
-                menuToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    navMenu.classList.toggle('active');
-                });
-            }
-            
-            // Close menu when clicking a link
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    navMenu.classList.remove('active');
-                });
-            });
-            
-            // Currency Toggle Logic
+            // Currency toggle
             const toggleOptions = document.querySelectorAll('.toggle-option');
             const priceElements = document.querySelectorAll('.price-range');
-            
             const USD_TO_KES = 120;
-            
+
             function updatePrices(currency) {
                 priceElements.forEach(el => {
                     if (el.dataset.kes && !el.dataset.kesMin) {
                         el.innerHTML = currency === 'KES' ? `KES ${el.dataset.kes}` : `$${el.dataset.usd}`;
-                    }
-                    else if (el.dataset.kesMin && el.dataset.kesMax) {
+                    } else if (el.dataset.kesMin && el.dataset.kesMax) {
                         const kesMin = parseInt(el.dataset.kesMin);
                         const kesMax = parseInt(el.dataset.kesMax);
                         if (currency === 'KES') {
@@ -499,7 +458,7 @@
                     }
                 });
             }
-            
+
             toggleOptions.forEach(opt => {
                 opt.addEventListener('click', function() {
                     toggleOptions.forEach(o => o.classList.remove('active'));
@@ -507,18 +466,8 @@
                     updatePrices(this.dataset.currency);
                 });
             });
-            
-            // Back to top
-            const backToTop = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => {
-                backToTop.classList.toggle('visible', window.scrollY > 400);
-            });
-            -
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            
-            // Scroll animations
+
+            // Scroll-reveal animations
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -527,58 +476,9 @@
                     }
                 });
             }, { threshold: 0.1 });
-            
+
             animatedElements.forEach(el => observer.observe(el));
         });
     </script>
-    <!-- Additional JavaScript for navbar hide/show -->
-<script>
-    // ===== NAVBAR HIDE ON SCROLL DOWN, SHOW ON SCROLL UP =====
-    // Same behavior as workshop page
-    (function() {
-        const navbar = document.querySelector('.navbar');
-        let lastScroll = 0;
-        const scrollThreshold = 50;
-        
-        if (!navbar) return;
-        
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset;
-            
-            // Add scrolled class for background
-            if (currentScroll > scrollThreshold) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-                navbar.classList.remove('hide'); // Ensure navbar is visible at top
-            }
-            
-            // Hide/show navbar based on scroll direction
-            if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-                // Scrolling DOWN - hide navbar
-                navbar.classList.add('hide');
-            } else if (currentScroll < lastScroll) {
-                // Scrolling UP - show navbar
-                navbar.classList.remove('hide');
-            }
-            
-            lastScroll = currentScroll;
-        });
-        
-        // Show navbar when mouse moves near top of screen (optional but nice)
-        let mouseTimeout;
-        window.addEventListener('mousemove', function(e) {
-            if (e.clientY < 100) {
-                clearTimeout(mouseTimeout);
-                navbar.classList.remove('hide');
-                mouseTimeout = setTimeout(function() {
-                    if (window.pageYOffset > scrollThreshold) {
-                        navbar.classList.add('hide');
-                    }
-                }, 1500);
-            }
-        });
-    })();
-</script>
 </body>
 </html>
