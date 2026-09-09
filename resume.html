@@ -3,68 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    
+
     <!-- Primary Meta Tags -->
     <title>Resume | Felix Marubi - CEO & Founder at Marubi-Labs</title>
     <meta name="title" content="Resume | Felix Marubi - CEO & Founder at Marubi-Labs">
     <meta name="description" content="Professional resume of Felix Marubi, Full-Stack Developer and Cybersecurity Specialist building Africa's digital future.">
     <meta name="keywords" content="Felix Marubi, Resume, CV, Full Stack Developer, Cybersecurity, Kenya">
     <meta name="author" content="Felix Marubi">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://marubilabs.com/resume.html">
     <meta property="og:title" content="Resume | Felix Marubi - CEO & Founder">
     <meta property="og:description" content="Professional resume of Felix Marubi, Full-Stack Developer and Cybersecurity Specialist.">
     <meta property="og:image" content="images/og-resume.jpg">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
-    
+
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/pages/home.css">
-    <link rel="stylesheet" href="css/pages/resume.css">
-    
+    <link rel="stylesheet" href="css/pages/home.css?v=20260908">
+    <link rel="stylesheet" href="css/pages/resume.css?v=20260908">
+
     <!-- PDF Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-    <!-- Navigation -->
-<!-- Navigation - Same structure as workshop page -->
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="index.html" class="logo">
-            <span class="logo-text">MARUBI-LABS</span>
-        </a>
-        
-        <div class="nav-menu">
-            <a href="index.html" class="nav-link"><span>Home</span></a>
-            <a href="origin.html" class="nav-link"><span>Origin</span></a>
-            <a href="arsenal.html" class="nav-link"><span>Arsenal</span></a>
-            <a href="workshop.html" class="nav-link"><span>Workshop</span></a>
-            <a href="vision.html" class="nav-link"><span>Vision</span></a>
-            <a href="connect.html" class="nav-link"><span>Connect</span></a>
-            <a href="resume.html" class="nav-link active"><span>Resume</span></a>
-            <a href="services.html" class="nav-link"><span>Pricing</span></a>
-            <a href="navigation.html" class="nav-link">Explore</a>
-        </div>
-        
-        <div class="nav-actions">
-            <a href="navigation.html" class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+    <!-- Navigation: same 3 tabs as every page — Home, Services, Resume -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">MARUBI-LABS</span>
             </a>
+
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link" data-tab="home">Home</a>
+                <a href="services.html" class="nav-link" data-tab="services">Services</a>
+                <a href="resume.html" class="nav-link active" data-tab="resume">Resume</a>
+            </div>
         </div>
-    </div>
-    <div class="scroll-progress" id="scrollProgress"></div>
-</nav>
+    </nav>
+
+    <!-- Mobile bottom tab bar (glassmorphism) -->
+    <nav class="bottom-nav" id="bottomNav" aria-label="Primary">
+        <a href="index.html" class="bottom-nav-link" data-tab="home">
+            <span class="bottom-nav-icon"><i class="fas fa-house"></i></span>
+            <span class="bottom-nav-label">Home</span>
+        </a>
+        <a href="services.html" class="bottom-nav-link" data-tab="services">
+            <span class="bottom-nav-icon"><i class="fas fa-layer-group"></i></span>
+            <span class="bottom-nav-label">Services</span>
+        </a>
+        <a href="resume.html" class="bottom-nav-link active" data-tab="resume">
+            <span class="bottom-nav-icon"><i class="fas fa-user"></i></span>
+            <span class="bottom-nav-label">Resume</span>
+        </a>
+    </nav>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -350,7 +352,7 @@
                                     <span class="skill-tag">HTML5/CSS3</span>
                                 </div>
                             </div>
-                            
+
                             <div class="skill-category">
                                 <h4>Backend</h4>
                                 <div class="skill-tags">
@@ -362,7 +364,7 @@
                                     <span class="skill-tag">SQL</span>
                                 </div>
                             </div>
-                            
+
                             <div class="skill-category">
                                 <h4>Cybersecurity</h4>
                                 <div class="skill-tags">
@@ -374,7 +376,7 @@
                                     <span class="skill-tag">Vulnerability Assessment</span>
                                 </div>
                             </div>
-                            
+
                             <div class="skill-category">
                                 <h4>Tools</h4>
                                 <div class="skill-tags">
@@ -412,7 +414,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Download Options at Bottom -->
             <div class="resume-footer-actions">
                 <p class="ref-note">References available upon request · marubi-labs.com/resume</p>
@@ -445,26 +447,25 @@
                         <a href="https://www.instagram.com/marubi___/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Navigate</h3>
                     <ul>
-                        <li><a href="origin.html">Origin</a></li>
-                        <li><a href="arsenal.html">Arsenal</a></li>
-                        <li><a href="workshop.html">Workshop</a></li>
-                        <li><a href="vision.html">Vision</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resume.html">Resume</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Companies</h3>
                     <ul>
                         <li><a href="https://mind-bridge.co.ke" target="_blank">Mindbridge</a></li>
-                        <li><a href="https://mzuri-organics.co.ke" target="_blank">Mzuri Organics</a></li>
+                        <li><a href="https://mzuriorganics.co.ke" target="_blank">Mzuri Organics</a></li>
                         <li><a href="#">Marubi-Labs</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Connect</h3>
                     <ul>
@@ -474,9 +475,9 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                <p>© 2024 MARUBI-LABS · Lets make History </p>
+                <p>© 2026 MARUBI-LABS · Lets make History</p>
             </div>
         </div>
     </footer>
@@ -486,57 +487,10 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- JavaScript -->
-    <script src="js/resume.js"></script>
-    <script src="js/navigation.js"></script>
-<!-- Additional JavaScript for navbar hide/show -->
-<script>
-    // ===== NAVBAR HIDE ON SCROLL DOWN, SHOW ON SCROLL UP =====
-    // Same behavior as workshop page
-    (function() {
-        const navbar = document.querySelector('.navbar');
-        let lastScroll = 0;
-        const scrollThreshold = 50;
-        
-        if (!navbar) return;
-        
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset;
-            
-            // Add scrolled class for background
-            if (currentScroll > scrollThreshold) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-                navbar.classList.remove('hide'); // Ensure navbar is visible at top
-            }
-            
-            // Hide/show navbar based on scroll direction
-            if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-                // Scrolling DOWN - hide navbar
-                navbar.classList.add('hide');
-            } else if (currentScroll < lastScroll) {
-                // Scrolling UP - show navbar
-                navbar.classList.remove('hide');
-            }
-            
-            lastScroll = currentScroll;
-        });
-        
-        // Show navbar when mouse moves near top of screen (optional but nice)
-        let mouseTimeout;
-        window.addEventListener('mousemove', function(e) {
-            if (e.clientY < 100) {
-                clearTimeout(mouseTimeout);
-                navbar.classList.remove('hide');
-                mouseTimeout = setTimeout(function() {
-                    if (window.pageYOffset > scrollThreshold) {
-                        navbar.classList.add('hide');
-                    }
-                }, 1500);
-            }
-        });
-    })();
-</script>
+    <!-- Shared behavior: navbar scroll state, active-tab highlighting, back-to-top -->
+    <script src="js/main.js?v=20260908"></script>
+
+    <!-- Page-specific: PDF/HTML download + mobile accordion (unchanged) -->
+    <script src="js/resume.js?v=20260908"></script>
 </body>
 </html>
