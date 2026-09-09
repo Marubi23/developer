@@ -1,296 +1,475 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Meta -->
-    <title>Felix Marubi · builder</title>
-    <meta name="description" content="Felix Marubi — building things that matter. CEO @ Marubi-Labs." />
-    <meta name="author" content="Felix Marubi" />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Felix Marubi" />
-    <meta property="og:description" content="building things that matter." />
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-    
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    
-    <style>
-        /* ========== RESET & BASE ========== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0d0d0d;
-            color: #e8e4df;
-            min-height: 100vh;
-            line-height: 1.6;
-            padding: 2rem;
-        }
-        
-        /* ========== LAYOUT ========== */
-        .container {
-            max-width: 900px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        /* ========== NAV ========== */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0 4rem;
-            width: 100%;
-        }
-        
-        .logo {
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #cc2f01;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: #a09b96;
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: color 0.2s;
-        }
-        
-        .nav-links a:hover {
-            color: #e8e4df;
-        }
-        
-        /* ========== HERO ========== */
-        .hero {
-            padding: 0.5rem 0 3rem;
-        }
-        
-        .badge {
-            display: inline-block;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #cc2f01;
-            border: 1px solid #cc2f0120;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-        }
-        
-        h1 {
-            font-size: clamp(4rem, 12vw, 7rem);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            margin-bottom: 1rem;
-        }
-        
-        h1 .highlight {
-            color: #cc2f01;
-        }
-        
-        .subtitle {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: #a09b96;
-            max-width: 520px;
-            margin-bottom: 2.5rem;
-            font-weight: 400;
-            line-height: 1.8;
-        }
-        
-        /* ========== BUTTONS ========== */
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 3.5rem;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.7rem 1.8rem;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .btn-primary {
-            background: #cc2f01;
-            color: #fff;
-        }
-        
-        .btn-primary:hover {
-            background: #b82800;
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: #e8e4df;
-            border: 1px solid #e8e4df30;
-        }
-        
-        .btn-outline:hover {
-            border-color: #cc2f01;
-            color: #cc2f01;
-            transform: translateY(-2px);
-        }
-        
-        /* ========== STATS ========== */
-        .stats {
-            display: flex;
-            gap: 4rem;
-            padding: 1.5rem 0;
-            border-top: 1px solid #ffffff08;
-            border-bottom: 1px solid #ffffff08;
-            margin-bottom: 3rem;
-        }
-        
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .stat-number {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #e8e4df;
-        }
-        
-        .stat-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #a09b96;
-        }
-        
-        /* ========== SOCIALS ========== */
-        .socials {
-            display: flex;
-            gap: 1.5rem;
-        }
-        
-        .socials a {
-            color: #a09b96;
-            font-size: 1.1rem;
-            transition: color 0.2s;
-        }
-        
-        .socials a:hover {
-            color: #e8e4df;
-        }
-        
-        /* ========== FOOTER ========== */
-        .footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid #ffffff08;
-            width: 100%;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #a09b96;
-        }
-        
-        .footer a {
-            color: #a09b96;
-            text-decoration: none;
-        }
-        
-        .footer a:hover {
-            color: #cc2f01;
-        }
-        
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 600px) {
-            body { padding: 1.5rem; }
-            .stats { flex-direction: column; gap: 1rem; }
-            .nav-links { gap: 1.5rem; }
-            .btn-group { flex-direction: column; }
-            .btn { justify-content: center; }
-            h1 { font-size: clamp(2.8rem, 10vw, 4rem); }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Felix Marubi | CEO & Founder at Marubi-Labs</title>
+    <meta name="title" content="Felix Marubi | CEO & Founder at Marubi-Labs">
+    <meta name="description" content="CEO of Marubi-Labs, building Mindbridge and Mzuri Organics. Software Engineering student at Kirinyaga University creating innovative solutions for African communities.">
+    <meta name="keywords" content="Felix Marubi, Marubi-Labs, CEO, Software Engineer, Mindbridge, Mzuri Organics, Kirinyaga University, Web Developer, Kenya">
+    <meta name="author" content="Felix Marubi">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marubilabs.com/">
+    <meta property="og:title" content="Felix Marubi | CEO & Founder at Marubi-Labs">
+    <meta property="og:description" content="Building Mindbridge, Mzuri Organics, and innovative solutions for African communities.">
+    <meta property="og:image" content="images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://marubilabs.com/">
+    <meta property="twitter:title" content="Felix Marubi | CEO & Founder at Marubi-Labs">
+    <meta property="twitter:description" content="Building Mindbridge, Mzuri Organics, and innovative solutions for African communities.">
+    <meta property="twitter:image" content="images/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/pages/home.css?v=20260908">
 </head>
 <body>
+    <!-- Navigation: 3 tabs only — Home, Services, Resume -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">MARUBI-LABS</span>
+            </a>
 
-<div class="container">
-    
-    <!-- NAV -->
-    <nav>
-        <span class="logo">Marubi-Labs</span>
-        <ul class="nav-links">
-            <li><a href="#">Work</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
-    
-    <!-- HERO -->
-    <section class="hero">
-        <span class="badge">✦ Your Favourite Tech Geek</span>
-        
-        <h1>
-            Marubi <span class="highlight">Labs</span>
-        </h1>
-        
-        <p class="subtitle">
-            Software Engineer · DevOps · Mobile Developer · Innovator · Startup Founder
-        </p>
-        
-        <div class="btn-group">
-            <a href="#" class="btn btn-primary">
-                <i class="fas fa-arrow-right"></i> See Work
-            </a>
-            <a href="#" class="btn btn-outline">
-                <i class="fas fa-paper-plane"></i> Connect
-            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active" data-tab="home">Home</a>
+                <a href="services.html" class="nav-link" data-tab="services">Services</a>
+                <a href="resume.html" class="nav-link" data-tab="resume">Resume</a>
+            </div>
         </div>
-        
-        <!-- STATS -->
-  
-        
-        <!-- SOCIALS -->
-        <div class="socials">
-            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </nav>
+
+    <!-- Mobile bottom tab bar (glassmorphism) -->
+    <nav class="bottom-nav" id="bottomNav" aria-label="Primary">
+        <a href="index.html" class="bottom-nav-link active" data-tab="home">
+            <span class="bottom-nav-icon"><i class="fas fa-house"></i></span>
+            <span class="bottom-nav-label">Home</span>
+        </a>
+        <a href="services.html" class="bottom-nav-link" data-tab="services">
+            <span class="bottom-nav-icon"><i class="fas fa-layer-group"></i></span>
+            <span class="bottom-nav-label">Services</span>
+        </a>
+        <a href="resume.html" class="bottom-nav-link" data-tab="resume">
+            <span class="bottom-nav-icon"><i class="fas fa-user"></i></span>
+            <span class="bottom-nav-label">Resume</span>
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <img
+                src="images/gallery/VirtuaVerse_ Cyberpunk and Pixels.gif"
+                alt="Background animation"
+                class="hero-background-img"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="hero-gradient-overlay"></div>
+
+        <div class="container">
+            <div class="hero-content">
+                <!-- LEFT COLUMN - Terminal -->
+                <div class="terminal-column animate-fade-in">
+                    <div class="terminal-line">
+                        <span class="typing-text" id="typingReview">I build custom softwares</span>
+                        <span class="cursor">|</span>
+                    </div>
+
+                    <div class="terminal-info">
+                        <div class="terminal-info-item">
+                            <span class="terminal-info-label"> Business Management Systems</span>
+                        </div>
+                        <div class="terminal-info-item">
+                            <span class="terminal-info-label"> E-Commerce & Marketplace Solutions</span>
+                        </div>
+                        <div class="terminal-info-item">
+                            <span class="terminal-info-label"> Data & Analytics Platforms</span>
+                        </div>
+                        <div class="terminal-info-item">
+                            <span class="terminal-info-label"> Industry-Specific Solutions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN - Hero Text -->
+                <div class="hero-text-column">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="greeting">Hello, I'm</span>
+                            <span class="name">Felix Marubi</span>
+                        </h1>
+
+                        <h2 class="hero-subtitle animate-slide-up delay-1">
+                            Software Engineer
+                        </h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-    
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>© 2026 · <a href="#">Marubi-Labs</a> · built with <i class="fas fa-heart" style="color:#cc2f01; font-size:0.7rem;"></i></p>
-    </footer>
-    
-</div>
 
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Clients i have worked with</h2>
+                <p class="section-subtitle">Satisfied customers</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item large">
+                    <img src="images/gallery/client1.JPG" alt="Command Center" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Mzuri Organics</h3>
+                        <span class="gallery-tag">2025</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/gallery/5.png" alt="Mindbridge Team" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Mindbridge</h3>
+                        <span class="gallery-tag">2025</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item tall">
+                    <img src="images/gallery/1.png" alt="Code" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Mindbridge</h3>
+                        <span class="gallery-tag">2025</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/gallery/2.png" alt="Mzuri Organics" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>mindbridge</h3>
+                        <span class="gallery-tag">2026</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/gallery/3.png" alt="Cybersecurity Lab" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>mindbridge</h3>
+                        <span class="gallery-tag">2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Showcase -->
+    <section class="projects-showcase">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Solutions i came up with</h2>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/gallery/smartrenter.JPG" alt="Mindbridge">
+                    </div>
+                    <div class="project-content">
+                        <span class="company">smartrenter.co.ke</span>
+                        <h3>SmartRenter</h3>
+                        <p>Property management platform for landlords and tenants. Built with user experience and efficiency in mind.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/gallery/bytelab.JPG" alt="Mzuri Organics">
+                    </div>
+                    <div class="project-content">
+                        <span class="company">Bytelab</span>
+                        <h3>Cyberbyte</h3>
+                        <p>Full-fledged cybersecurity lab for training and penetration testing. Equipped with the latest tools and technologies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview -->
+    <section class="about-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Government/NGO's Projects</h2>
+                <p class="section-subtitle">skills acquired along the way</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Quality Assurance Team Member</h3>
+                    <p>Took Part in the development of government-funded software project at NTSA since March 2026 till August</p>
+                </div>
+
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Wangari Maathai Hackathon</h3>
+                    <p>Participated in the Wangari Maathai Hackathon, where I worked on a solo hack to develop a solution for environmental conservation.</p>
+                </div>
+
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Coming Soon</h3>
+                    <p>More projects and collaborations in the pipeline.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ship custom softwares for your business</h2>
+                <p class="section-subtitle">Full-stack development • AI/ML • Cloud • Security</p>
+            </div>
+
+            <div class="skills-cloud">
+                <!-- Business Management Systems -->
+                <span class="skill-tag" data-category="bms">ERP Systems</span>
+                <span class="skill-tag" data-category="bms">CRM Development</span>
+                <span class="skill-tag" data-category="bms">Inventory Management</span>
+                <span class="skill-tag" data-category="bms">HR & Payroll</span>
+                <span class="skill-tag" data-category="bms">Project Management</span>
+
+                <!-- E-Commerce & Marketplace -->
+                <span class="skill-tag" data-category="ecom">Custom E-Commerce</span>
+                <span class="skill-tag" data-category="ecom">Multi-vendor Marketplaces</span>
+                <span class="skill-tag" data-category="ecom">Subscription Platforms</span>
+                <span class="skill-tag" data-category="ecom">Booking Systems</span>
+                <span class="skill-tag" data-category="ecom">Payment Integrations</span>
+
+                <!-- Data & Analytics -->
+                <span class="skill-tag" data-category="data">Dashboards & BI</span>
+                <span class="skill-tag" data-category="data">Data Visualization</span>
+                <span class="skill-tag" data-category="data">Analytics Tracking</span>
+                <span class="skill-tag" data-category="data">Report Generation</span>
+                <span class="skill-tag" data-category="data">ETL Pipelines</span>
+
+                <!-- Industry-Specific -->
+                <span class="skill-tag" data-category="industry">Healthcare Systems</span>
+                <span class="skill-tag" data-category="industry">LMS Platforms</span>
+                <span class="skill-tag" data-category="industry">Real Estate Management</span>
+                <span class="skill-tag" data-category="industry">Logistics & Fleet</span>
+                <span class="skill-tag" data-category="industry">Legal Case Management</span>
+                <span class="skill-tag" data-category="industry">Manufacturing Systems</span>
+
+                <!-- Tech Stack -->
+                <span class="skill-tag" data-category="tech">JavaScript/TypeScript</span>
+                <span class="skill-tag" data-category="tech">React</span>
+                <span class="skill-tag" data-category="tech">Angular</span>
+                <span class="skill-tag" data-category="tech">Vue.js</span>
+                <span class="skill-tag" data-category="tech">Node.js</span>
+                <span class="skill-tag" data-category="tech">Python</span>
+                <span class="skill-tag" data-category="tech">Flask</span>
+                <span class="skill-tag" data-category="tech">MongoDB</span>
+                <span class="skill-tag" data-category="tech">MySQL</span>
+                <span class="skill-tag" data-category="tech">Firebase</span>
+                <span class="skill-tag" data-category="tech">Git</span>
+                <span class="skill-tag" data-category="tech">Docker</span>
+                <span class="skill-tag" data-category="tech">AWS</span>
+                <span class="skill-tag" data-category="tech">Cybersecurity</span>
+                <span class="skill-tag" data-category="tech">UI/UX</span>
+            </div>
+
+            <div class="text-center">
+                <a href="resume.html" class="btn btn-outline">
+                    <i class="fas fa-tools"></i>
+                    Proffessional Resume & Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Connect Directly</h2>
+                    <p>Whether it's a project, collaboration, or just to say hi — the lines are always open.</p>
+
+                    <div class="info-items">
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <a href="mailto:felixmarubi2005@gmail.com">felixmarubi2005@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <a href="tel:+254712683708">+254 712 683 708</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://github.com/Marubi23" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/felixmarubi" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/felixmarubi" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/marubi___/" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h2>Send a Message</h2>
+                    <form id="quickContactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="4" placeholder="Your Message..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-paper-plane"></i>
+                            Send
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <i class="fas fa-code"></i>
+                        <span>MARUBI-LABS</span>
+                    </a>
+                    <p>Let's make history together</p>
+                    <div class="social-links">
+                        <a href="https://github.com/Marubi23" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/felixmarubi" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/felixmarubi" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/marubi___/" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Navigate</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Companies</h3>
+                    <ul>
+                        <li><a href="https://mind-bridge.co.ke" target="_blank">Mindbridge</a></li>
+                        <li><a href="https://mzuriorganics.co.ke" target="_blank">Mzuri Organics</a></li>
+                        <li><a href="#">Marubi-Labs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 MARUBI-LABS · Lets Make History</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/main.js?v=20260908"></script>
+    <script src="js/animations.js?v=20260908"></script>
+    <script>
+        // Terminal typing effect
+        const typingReviews = [
+            "Building Mindbridge for mental health",
+            "Mzuri Organics serving farmers",
+            "Securing African digital space",
+            "20 · CEO · Building legacy"
+        ];
+        let reviewIdx = 0;
+        const typingEl = document.getElementById('typingReview');
+
+        function typeReview() {
+            if (typingEl) {
+                typingEl.style.opacity = '0';
+                setTimeout(() => {
+                    typingEl.textContent = typingReviews[reviewIdx];
+                    typingEl.style.opacity = '1';
+                    reviewIdx = (reviewIdx + 1) % typingReviews.length;
+                }, 500);
+            }
+        }
+
+        if (typingEl) {
+            setInterval(typeReview, 3000);
+        }
+    </script>
 </body>
 </html>
