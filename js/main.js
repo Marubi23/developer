@@ -5,289 +5,98 @@
  * ============================================
  */
 
-// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 marubyte portfolio initializing...');
-    
-    // Initialize all managers
-    initializeManagers();
-    
-    // Setup global event listeners
-    setupGlobalEvents();
-    
-    // Check initial load
-    handleInitialLoad();
-    
-    console.log('✅ marubyte portfolio ready!');
+    console.log('🚀 marubi-labs portfolio initializing...');
+
+    window.navbarScrollManager = new NavbarScrollManager();
+    window.backToTopManager = new BackToTopManager();
+    setActiveTab();
+    setupContactForm();
+    preloadImages();
+
+    console.log('✅ marubi-labs portfolio ready!');
 });
 
 // ============================================
-// NAVBAR HIDE ON SCROLL FUNCTIONALITY
+// NAVBAR: adds a subtle solid background once the
+// page is scrolled. The bar itself stays put — no
+// hide/show gymnastics, no hamburger drawer.
 // ============================================
-
 class NavbarScrollManager {
     constructor() {
-        this.navbar = document.querySelector('.navbar');
-        this.lastScrollTop = 0;
-        this.scrollThreshold = 100;
+        this.navbar = document.getElementById('mainNav');
         this.ticking = false;
-        
+
         if (this.navbar) {
-            this.init();
+            this.handleScroll = this.handleScroll.bind(this);
+            window.addEventListener('scroll', () => {
+                if (!this.ticking) {
+                    requestAnimationFrame(() => this.handleScroll());
+                    this.ticking = true;
+                }
+            }, { passive: true });
+            this.handleScroll();
         }
     }
-    
-    init() {
-        this.handleScroll = this.handleScroll.bind(this);
-        window.addEventListener('scroll', () => {
-            if (!this.ticking) {
-                requestAnimationFrame(() => this.handleScroll());
-                this.ticking = true;
-            }
-        });
-        
-        // Initial check
-        this.handleScroll();
-    }
-    
+
     handleScroll() {
-        if (!this.navbar) {
-            this.ticking = false;
-            return;
-        }
-        
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Hide navbar when scrolling down past threshold
-        if (scrollTop > this.lastScrollTop && scrollTop > this.scrollThreshold) {
-            this.navbar.classList.add('hide');
-        } 
-        // Show navbar when scrolling up or at top
-        else if (scrollTop < this.lastScrollTop || scrollTop <= this.scrollThreshold) {
-            this.navbar.classList.remove('hide');
-        }
-        
-        // Add scrolled class for styling when scrolled past 50px
-        if (scrollTop > 50) {
-            this.navbar.classList.add('scrolled');
-        } else {
-            this.navbar.classList.remove('scrolled');
-        }
-        
-        this.lastScrollTop = scrollTop;
+        this.navbar.classList.toggle('scrolled', scrollTop > 40);
         this.ticking = false;
     }
 }
 
 // ============================================
-// MOBILE MENU HANDLER
+// BACK TO TOP
 // ============================================
-
-class MobileMenuManager {
+class BackToTopManager {
     constructor() {
-        this.menuToggle = document.querySelector('.menu-toggle');
-        this.navMenu = document.querySelector('.nav-menu');
-        this.navLinks = document.querySelectorAll('.nav-link');
-        this.isOpen = false;
-        
-        if (this.menuToggle && this.navMenu) {
-            this.init();
-        }
-    }
-    
-    init() {
-        // Create close button for mobile
-        this.createCloseButton();
-        
-        // Toggle menu on click
-        this.menuToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.toggleMenu();
+        this.button = document.getElementById('backToTop');
+        if (!this.button) return;
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            this.button.classList.toggle('visible', scrollTop > 400);
+        }, { passive: true });
+
+        this.button.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-        
-        // Close menu when clicking a link
-        this.navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                this.closeMenu();
-            });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (this.isOpen && 
-                !this.navMenu.contains(e.target) && 
-                !this.menuToggle.contains(e.target)) {
-                this.closeMenu();
-            }
-        });
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && this.isOpen) {
-                this.closeMenu();
-            }
-        });
-    }
-    
-    createCloseButton() {
-        // Add close button to mobile menu if not exists
-        if (!document.querySelector('.nav-menu-close')) {
-            const closeBtn = document.createElement('button');
-            closeBtn.className = 'nav-menu-close';
-            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-            closeBtn.addEventListener('click', () => this.closeMenu());
-            this.navMenu.insertBefore(closeBtn, this.navMenu.firstChild);
-        }
-    }
-    
-    toggleMenu() {
-        if (this.isOpen) {
-            this.closeMenu();
-        } else {
-            this.openMenu();
-        }
-    }
-    
-    openMenu() {
-        this.navMenu.classList.add('active');
-        this.isOpen = true;
-        document.body.style.overflow = 'hidden';
-        
-        // Change toggle icon
-        const icon = this.menuToggle.querySelector('i');
-        if (icon) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        }
-    }
-    
-    closeMenu() {
-        this.navMenu.classList.remove('active');
-        this.isOpen = false;
-        document.body.style.overflow = '';
-        
-        // Change toggle icon back
-        const icon = this.menuToggle.querySelector('i');
-        if (icon) {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
     }
 }
 
-// Initialize all managers
-function initializeManagers() {
-    // Order matters - dependencies should load later
-    // Theme manager (independent)
-    if (typeof ThemeManager !== 'undefined') {
-        window.themeManager = new ThemeManager();
-    }
-    
-    // Navigation manager (depends on theme)
-    if (typeof NavigationManager !== 'undefined') {
-        window.navigationManager = new NavigationManager();
-    }
-    
-    // Animation manager (independent)
-    if (typeof AnimationManager !== 'undefined') {
-        window.animationManager = new AnimationManager();
-    }
-    
-    // Contact manager (depends on form existing)
-    if (typeof ContactManager !== 'undefined') {
-        window.contactManager = new ContactManager();
-    }
-    
-    // Navbar scroll hide manager
-    window.navbarScrollManager = new NavbarScrollManager();
-    
-    // Mobile menu manager
-    window.mobileMenuManager = new MobileMenuManager();
-}
+// ============================================
+// ACTIVE TAB (top navbar + mobile bottom bar)
+// Matches the current page filename against each
+// link's href so both nav bars stay in sync.
+// ============================================
+function setActiveTab() {
+    const currentPage = (window.location.pathname.split('/').pop() || 'index.html');
 
-// Setup global event listeners
-function setupGlobalEvents() {
-    // Handle resize events
-    window.addEventListener('resize', debounce(() => {
-        handleResize();
-    }, 250));
-    
-    // Handle orientation change on mobile
-    window.addEventListener('orientationchange', () => {
-        handleOrientationChange();
-    });
-    
-    // Handle online/offline status
-    window.addEventListener('online', () => {
-        showNotification('You are back online!', 'success');
-    });
-    
-    window.addEventListener('offline', () => {
-        showNotification('You are offline. Some features may be unavailable.', 'warning');
+    document.querySelectorAll('.nav-link, .bottom-nav-link').forEach(link => {
+        const href = link.getAttribute('href');
+        const isActive = href === currentPage || (currentPage === '' && href === 'index.html');
+        link.classList.toggle('active', isActive);
     });
 }
 
-// Handle initial page load
-function handleInitialLoad() {
-    // Remove any loading classes
-    document.body.classList.remove('loading');
-    
-    // Check for hash in URL
-    if (window.location.hash) {
-        setTimeout(() => {
-            const target = document.querySelector(window.location.hash);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 500);
-    }
-    
-    // Preload images
-    preloadImages();
-}
+// ============================================
+// CONTACT FORM (front-end only stub)
+// ============================================
+function setupContactForm() {
+    const form = document.getElementById('quickContactForm');
+    if (!form) return;
 
-// Handle window resize
-function handleResize() {
-    // Close mobile menu if open and on desktop
-    if (window.innerWidth > 768 && window.mobileMenuManager) {
-        window.mobileMenuManager.closeMenu();
-    }
-    
-    // Refresh any layout-dependent calculations
-    if (window.animationManager) {
-        window.animationManager.checkReveal();
-    }
-}
-
-// Handle orientation change
-function handleOrientationChange() {
-    // Wait for orientation change to complete
-    setTimeout(() => {
-        handleResize();
-    }, 200);
-}
-
-// Preload important images
-function preloadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    images.forEach(img => {
-        const src = img.getAttribute('data-src');
-        if (src) {
-            const preloadLink = document.createElement('link');
-            preloadLink.rel = 'preload';
-            preloadLink.as = 'image';
-            preloadLink.href = src;
-            document.head.appendChild(preloadLink);
-            
-            // Load the image
-            img.src = src;
-            img.removeAttribute('data-src');
-        }
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        showNotification('Message sent — I\'ll get back to you soon.', 'success');
+        form.reset();
     });
 }
 
-// Show notification
+// ============================================
+// NOTIFICATIONS
+// ============================================
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
@@ -295,137 +104,66 @@ function showNotification(message, type = 'info') {
         <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle'}"></i>
         <span>${message}</span>
     `;
-    
+
     document.body.appendChild(notification);
-    
-    // Animate in
     setTimeout(() => notification.classList.add('show'), 100);
-    
-    // Remove after 3 seconds
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
-// Add notification styles if not present
 if (!document.getElementById('notification-styles')) {
     const style = document.createElement('style');
     style.id = 'notification-styles';
     style.textContent = `
         .notification {
             position: fixed;
-            bottom: 20px;
+            bottom: calc(var(--bottom-nav-height, 0px) + 1.5rem);
             right: 20px;
-            background: white;
-            color: var(--dark);
+            background: var(--marubi-onyx);
+            color: var(--marubi-cream);
             padding: 1rem 1.5rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-xl);
+            border-radius: 8px;
+            box-shadow: var(--shadow-onyx);
             display: flex;
             align-items: center;
             gap: 1rem;
             transform: translateX(120%);
             transition: transform 0.3s ease;
-            z-index: var(--z-toast);
-            border-left: 4px solid var(--primary);
+            z-index: 2000;
+            border-left: 4px solid var(--marubi-ember);
         }
-        
-        [data-theme="dark"] .notification {
-            background: var(--dark-soft);
-            color: var(--light);
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .notification-success {
-            border-left-color: var(--success);
-        }
-        
-        .notification-warning {
-            border-left-color: var(--warning);
-        }
-        
-        .notification i {
-            font-size: 1.2rem;
-        }
-        
-        .notification-success i {
-            color: var(--success);
-        }
-        
-        .notification-warning i {
-            color: var(--warning);
-        }
-        
-        .notification-info i {
-            color: var(--primary);
-        }
-        
+        .notification.show { transform: translateX(0); }
+        .notification-success { border-left-color: #27c93f; }
+        .notification-warning { border-left-color: #ffbd2e; }
+        .notification i { font-size: 1.2rem; }
+        .notification-success i { color: #27c93f; }
+        .notification-warning i { color: #ffbd2e; }
+        .notification-info i { color: var(--marubi-ember); }
         @media (max-width: 480px) {
-            .notification {
-                left: 20px;
-                right: 20px;
-                transform: translateY(120%);
-            }
-            
-            .notification.show {
-                transform: translateY(0);
-            }
+            .notification { left: 20px; right: 20px; transform: translateY(120%); }
+            .notification.show { transform: translateY(0); }
         }
     `;
     document.head.appendChild(style);
 }
 
-// Error handling
-window.addEventListener('error', (e) => {
-    console.error('Global error:', e.error);
-});
-
-// Unhandled promise rejection
-window.addEventListener('unhandledrejection', (e) => {
-    console.error('Unhandled promise rejection:', e.reason);
-});
-
-// Debounce helper (if not already defined)
-if (typeof debounce === 'undefined') {
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
+// ============================================
+// IMAGE PRELOAD (for [data-src] lazy images)
+// ============================================
+function preloadImages() {
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        const src = img.getAttribute('data-src');
+        if (src) {
+            img.src = src;
+            img.removeAttribute('data-src');
+        }
+    });
 }
 
-// Throttle helper (if not already defined)
-if (typeof throttle === 'undefined') {
-    function throttle(func, limit) {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
-}
-
-// Export for module usage
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        initializeManagers,
-        setupGlobalEvents,
-        handleInitialLoad,
-        showNotification,
-        NavbarScrollManager,
-        MobileMenuManager
-    };
-}
+// ============================================
+// ERROR HANDLING
+// ============================================
+window.addEventListener('error', (e) => console.error('Global error:', e.error));
+window.addEventListener('unhandledrejection', (e) => console.error('Unhandled promise rejection:', e.reason));
