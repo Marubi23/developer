@@ -1,45 +1,16 @@
-/* ===== NAVBAR HIDE/SHOW ANIMATION - Same as workshop ===== */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1.2rem 2rem;
-    z-index: 1000;
-    transition: transform 0.3s ease, background 0.3s ease, padding 0.3s ease;
-    background: transparent;
-    backdrop-filter: none;
-}
+/* ============================================
+   RESUME PAGE STYLES
+   NOTE: All navbar styling lives in css/pages/home.css
+   so that Home / Services / Resume share one behavior.
+   ============================================ */
 
-/* Hide navbar when scrolling down */
-.navbar.hide {
-    transform: translateY(-100%);
-}
-
-/* Scrolled state - solid background */
-.navbar.scrolled {
-    background: transparent;
-    backdrop-filter: blur(10px);
-    padding: 0.8rem 2rem;
-    border-bottom: 1px solid rgba(204, 47, 1, 0.2);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* When navbar is hidden AND scrolled */
-.navbar.hide.scrolled {
-    background:transparent;
-    backdrop-filter: blur(10px);
-}
-
-
-
+/* ===== PAGE HEADER WITH BACKGROUND IMAGE ===== */
 .page-header {
     min-height: 30vh;
     display: flex;
     align-items: flex-end;
     position: relative;
     padding: 8rem 0 4rem;
-    /* YOUR IMAGE HERE - replace 'your-image.jpg' with actual filename */
     background: linear-gradient(0deg, var(--marubi-charcoal) 0%, rgba(36, 35, 35, 0.6) 100%),
                 url('/images/gallery/resume.JPG');
     background-size: cover;
@@ -50,7 +21,6 @@
     border-bottom: 1px solid rgba(204, 47, 1, 0.2);
 }
 
-/* Darker gradient overlay for text readability */
 .page-header::before {
     content: '';
     position: absolute;
@@ -66,7 +36,6 @@
     animation: emberPulse 8s ease infinite alternate;
 }
 
-/* Optional: Add an ember glow border at bottom */
 .page-header::after {
     content: '';
     position: absolute;
@@ -136,7 +105,6 @@
     flex-wrap: wrap;
 }
 
-/* Mobile optimization */
 @media (max-width: 768px) {
     .page-header {
         background-attachment: scroll;
@@ -160,49 +128,6 @@
     .page-title {
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
-}
-.page-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
-    color: var(--marubi-cream);
-    margin-bottom: 1rem;
-    position: relative;
-    display: inline-block;
-    line-height: 1.1;
-}
-
-.page-title .ember {
-    color: var(--marubi-ember);
-    position: relative;
-    display: inline-block;
-    text-shadow: 0 0 20px rgba(204, 47, 1, 0.3);
-}
-
-.page-title .ember::after {
-    content: '';
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--marubi-ember);
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: slideIn 1s ease 1s forwards;
-}
-
-.page-subtitle {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 600px;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-}
-
-.header-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
 }
 
 /* ===== RESUME SECTION ===== */
@@ -696,7 +621,6 @@
         font-size: 1.3rem !important;
     }
 
-    /* Collapsible sections */
     .resume-block {
         margin-bottom: 0.5rem !important;
         border: 1px solid rgba(204, 47, 1, 0.15) !important;

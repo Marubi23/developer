@@ -1,45 +1,16 @@
+/* ============================================
+   SERVICES PAGE STYLES
+   NOTE: All navbar styling lives in css/pages/home.css
+   so that Home / Services / Resume share one behavior.
+   ============================================ */
+
 /* ===== PAGE HEADER WITH BACKGROUND IMAGE ===== */
-/* ===== NAVBAR HIDE/SHOW ANIMATION - Same as workshop ===== */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1.2rem 2rem;
-    z-index: 1000;
-    transition: transform 0.3s ease, background 0.3s ease, padding 0.3s ease;
-    background: transparent;
-    backdrop-filter: none;
-}
-
-/* Hide navbar when scrolling down */
-.navbar.hide {
-    transform: translateY(-100%);
-}
-
-/* Scrolled state - solid background */
-.navbar.scrolled {
-    background: rgba(36, 35, 35, 0.9);
-    backdrop-filter: blur(10px);
-    padding: 0.8rem 2rem;
-    border-bottom: 1px solid rgba(204, 47, 1, 0.2);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* When navbar is hidden AND scrolled */
-.navbar.hide.scrolled {
-    background: rgba(36, 35, 35, 0.9);
-    backdrop-filter: blur(10px);
-}
-
-
 .page-header {
     min-height: 40vh;
     display: flex;
     align-items: flex-end;
     position: relative;
     padding: 8rem 0 4rem;
-    /* YOUR IMAGE HERE - replace 'your-image.jpg' with actual filename */
     background: linear-gradient(0deg, var(--marubi-charcoal) 0%, rgba(36, 35, 35, 0.65) 100%),
                 url('/images/gallery/services1.JPG');
     background-size: cover;
@@ -50,7 +21,6 @@
     border-bottom: 1px solid rgba(204, 47, 1, 0.2);
 }
 
-/* Ember glow overlay with dark gradient for text readability */
 .page-header::before {
     content: '';
     position: absolute;
@@ -66,7 +36,6 @@
     animation: emberPulse 8s ease infinite alternate;
 }
 
-/* Optional: Ember glow border at bottom */
 .page-header::after {
     content: '';
     position: absolute;
@@ -148,7 +117,6 @@
     opacity: 0.7;
 }
 
-/* Mobile optimization */
 @media (max-width: 768px) {
     .page-header {
         background-attachment: scroll;
@@ -179,7 +147,6 @@
     }
 }
 
-/* Landscape mode fix */
 @media (max-width: 768px) and (orientation: landscape) {
     .page-header {
         min-height: 60vh;
@@ -187,7 +154,6 @@
     }
 }
 
-/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
     .page-header::before {
         animation: none;

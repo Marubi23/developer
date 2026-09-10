@@ -18,14 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// NAVBAR: adds a subtle solid background once the
-// page is scrolled. The bar itself stays put — no
-// hide/show gymnastics, no hamburger drawer.
+// NAVBAR
+// - Fixed at the top on every page.
+// - Transparent at top, stays transparent but tightens padding on scroll.
+// - Hides when scrolling DOWN past a threshold, reveals when scrolling UP.
+// - Same behavior on Home, Services and Resume.
 // ============================================
 class NavbarScrollManager {
     constructor() {
         this.navbar = document.getElementById('mainNav');
         this.ticking = false;
+        this.lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        this.hideThreshold = 80;  // px scrolled before hide kicks in
 
         if (this.navbar) {
             this.handleScroll = this.handleScroll.bind(this);
@@ -40,8 +44,21 @@ class NavbarScrollManager {
     }
 
     handleScroll() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        this.navbar.classList.toggle('scrolled', scrollTop > 40);
+        const y = window.pageYOffset || document.documentElement.scrollTop;
+        const goingDown = y > this.lastScrollY;
+        const delta = Math.abs(y - this.lastScrollY);
+
+        // Tighten / deco state past 40px
+        this.navbar.classList.toggle('scrolled', y > 40);
+
+        // Only hide when the user is meaningfully scrolling down
+        if (goingDown && y > this.hideThreshold && delta > 4) {
+            this.navbar.classList.add('hide');
+        } else if (!goingDown || y <= this.hideThreshold) {
+            this.navbar.classList.remove('hide');
+        }
+
+        this.lastScrollY = y;
         this.ticking = false;
     }
 }
@@ -67,8 +84,6 @@ class BackToTopManager {
 
 // ============================================
 // ACTIVE TAB (top navbar + mobile bottom bar)
-// Matches the current page filename against each
-// link's href so both nav bars stay in sync.
 // ============================================
 function setActiveTab() {
     const currentPage = (window.location.pathname.split('/').pop() || 'index.html');
