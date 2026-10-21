@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-loading">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary Meta Tags -->
-    <title>Felix Marubi |  Founder at Marubi-Labs</title>
+    <title>Felix Marubi | Founder at Marubi-Labs</title>
     <meta name="title" content="marubi-labs">
     <meta name="description" content="Felix Marubi is the CEO & Founder of Marubi-Labs, a software engineering company focused on building innovative solutions for African communities. With expertise in AI, cybersecurity, and cloud infrastructure, Felix is dedicated to creating impactful technologies that drive progress and development.">
     <meta name="keywords" content="Felix Marubi, Marubi-Labs, CEO, Software Engineer, Mindbridge, Mzuri Organics, Kirinyaga University, Web Developer, Kenya">
@@ -15,14 +15,14 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://marubilabs.com/">
-    <meta property="og:title" content="Felix Marubi | Founder  Marubi-Labs">
+    <meta property="og:title" content="Felix Marubi | Founder Marubi-Labs">
     <meta property="og:description" content="Building Mindbridge, Mzuri Organics, and innovative solutions for African communities.">
     <meta property="og:image" content="images/og-image.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://marubilabs.com/">
-    <meta property="twitter:title" content="Felix Marubi |  Founder  Marubi-Labs">
+    <meta property="twitter:title" content="Felix Marubi | Founder Marubi-Labs">
     <meta property="twitter:description" content="Building Mindbridge, Mzuri Organics, and innovative solutions for African communities.">
     <meta property="twitter:image" content="images/og-image.jpg">
 
@@ -30,17 +30,172 @@
     <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
 
+    <!-- 1 · Kill stale SW / caches BEFORE first paint (not after) -->
+    <script>
+      (function () {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations()
+            .then(function (rs) { rs.forEach(function (r) { r.unregister().catch(function(){}); }); })
+            .catch(function(){});
+        }
+        if (window.caches) {
+          caches.keys().then(function (keys) {
+            keys.forEach(function (k) {
+              if (k.indexOf('2025') > -1 || k.indexOf('v1') > -1) caches.delete(k);
+            });
+          }).catch(function(){});
+        }
+      })();
+    </script>
+
+    <!-- 2 · Hero art ready before the loader lifts -->
+    <link rel="preload" as="image"
+          href="images/gallery/VirtuaVerse_%20Cyberpunk%20and%20Pixels.gif"
+          fetchpriority="high">
+
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- 3 · CRITICAL INLINE CSS — no network, paints on frame 1 -->
+    <style>
+      :root{
+        --ember:#cc2f01; --ember-light:#e64d2e;
+        --onyx:#242323; --charcoal:#1a1a1a; --cream:#f8f5f2;
+      }
+      html{ background:var(--charcoal); }
+
+      html.is-loading,
+      html.is-loading body{ overflow:hidden !important; height:100%; background:var(--charcoal); }
+      html.is-loading body > *:not(#site-loader){ visibility:hidden !important; }
+
+      #site-loader{
+        position:fixed; inset:0; z-index:99999; overflow:hidden;
+        display:flex; align-items:center; justify-content:center;
+        background:
+          radial-gradient(ellipse 80% 60% at 50% 40%, rgba(204,47,1,.20), transparent 62%),
+          linear-gradient(160deg, #211f1f 0%, #1a1a1a 45%, #141313 100%);
+        transition: opacity .6s ease, visibility .6s ease;
+      }
+      #site-loader.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+
+      /* slow, drifting ember glow behind everything (gradient flows, never jumps) */
+      #site-loader::before{
+        content:""; position:absolute; inset:-30%;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(230,77,46,.22), transparent 38%),
+          radial-gradient(circle at 72% 68%, rgba(204,47,1,.18), transparent 42%);
+        filter:blur(40px);
+        animation: slDrift 9s ease-in-out infinite alternate;
+      }
+      /* faint grid that fades out toward the edges */
+      #site-loader::after{
+        content:""; position:absolute; inset:0;
+        background-image:
+          linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        background-size:44px 44px;
+        -webkit-mask-image:radial-gradient(circle at 50% 45%, #000 0%, transparent 68%);
+                mask-image:radial-gradient(circle at 50% 45%, #000 0%, transparent 68%);
+      }
+      @keyframes slDrift{
+        from{ transform:translate3d(-4%, -3%, 0) scale(1); }
+        to  { transform:translate3d(4%, 3%, 0) scale(1.12); }
+      }
+
+      .sl-wrap{
+        position:relative; z-index:1;
+        display:flex; flex-direction:column; align-items:center; gap:30px;
+      }
+
+      /* thin flowing progress line under the wordmark */
+      .sl-bar{
+        position:relative; width:min(220px, 56vw); height:3px; border-radius:99px;
+        background:rgba(255,255,255,.1); overflow:hidden; margin-top:-6px;
+      }
+      .sl-bar::after{
+        content:""; position:absolute; inset:0; width:45%; border-radius:inherit;
+        background:linear-gradient(90deg, transparent, var(--ember-light), #ffb199, var(--ember-light), transparent);
+        animation: slBar 1.4s cubic-bezier(.65,0,.35,1) infinite;
+      }
+      @keyframes slBar{
+        from{ transform:translateX(-110%); }
+        to  { transform:translateX(250%); }
+      }
+
+      /* — 4 ember tiles assembling — */
+      .sl-tiles{
+        display:grid; grid-template-columns:repeat(2,1fr); gap:10px;
+        width:80px; height:80px;
+      }
+      .sl-tile{
+        border-radius:8px;
+        background:linear-gradient(135deg,var(--ember),var(--ember-light));
+        opacity:.12; transform:scale(.86);
+        animation: slTile 1.5s cubic-bezier(.6,.05,.2,1) infinite;
+      }
+      .sl-tile:nth-child(1){ animation-delay:0s }
+      .sl-tile:nth-child(2){ animation-delay:.14s }
+      .sl-tile:nth-child(3){ animation-delay:.28s }
+      .sl-tile:nth-child(4){ animation-delay:.42s }
+      @keyframes slTile{
+        0%,100%{ opacity:.12; transform:scale(.86) }
+        38%    { opacity:1;   transform:scale(1); box-shadow:0 0 22px rgba(204,47,1,.55) }
+      }
+
+      /* — MARUBI-LABS · thick white brand wordmark — */
+      .sl-brand{
+        font-family:'Clash Display', Inter, sans-serif;
+        font-weight:800;
+        font-size:clamp(1.9rem, 5.2vw, 2.7rem);
+        letter-spacing:.01em;
+        line-height:1;
+        color:#ffffff;
+        text-align:center;
+        text-transform:uppercase;
+        -webkit-font-smoothing:antialiased;
+        text-rendering:optimizeLegibility;
+      }
+
+      @media (prefers-reduced-motion: reduce){
+        .sl-tile{ animation:none !important; opacity:.9; transform:none; }
+        #site-loader::before, .sl-bar::after{ animation:none !important; }
+      }
+    </style>
+
+    <noscript>
+      <style>
+        html.is-loading body > *:not(#site-loader){ visibility:visible !important; }
+        #site-loader{ display:none !important; }
+      </style>
+    </noscript>
+
     <!-- CSS -->
-    <link rel="stylesheet" href="css/pages/home.css?v=20260910">
+    <link rel="stylesheet" href="css/pages/home.css?v=20261021">
+    <!-- Polish layer: glass cards, navbar, flowing gradients. Loads last so it refines home.css without replacing it. -->
+    <link rel="stylesheet" href="css/pages/polish.css?v=20261021">
 </head>
 <body>
+
+    <!-- ===== SITE LOADER / SKELETON — paints before any network request ===== -->
+    <div id="site-loader" class="site-loader" role="status" aria-live="polite" aria-label="Loading Marubi Labs">
+        <div class="sl-wrap">
+            <div class="sl-tiles" aria-hidden="true">
+                <span class="sl-tile"></span>
+                <span class="sl-tile"></span>
+                <span class="sl-tile"></span>
+                <span class="sl-tile"></span>
+            </div>
+            <div class="sl-brand">MARUBI-LABS</div>
+            <div class="sl-bar" aria-hidden="true"></div>
+        </div>
+    </div>
+
     <!-- Navigation: 3 tabs only — Home, Services, Resume -->
     <nav class="navbar" id="mainNav">
         <div class="nav-container">
@@ -76,10 +231,11 @@
     <section class="hero">
         <div class="hero-background">
             <img
-                src="images/gallery/VirtuaVerse_ Cyberpunk and Pixels.gif"
-                alt="Background animation"
+                src="images/gallery/VirtuaVerse_%20Cyberpunk%20and%20Pixels.gif"
+                alt=""
                 class="hero-background-img"
-                loading="lazy"
+                fetchpriority="high"
+                decoding="async"
             >
         </div>
 
@@ -87,8 +243,7 @@
 
         <div class="container">
             <div class="hero-content">
-                <!-- LEFT COLUMN - Terminal -->
-           
+                <!-- LEFT COLUMN - Terminal (currently unused, kept for future) -->
 
                 <!-- RIGHT COLUMN - Hero Text -->
                 <div class="hero-text-column">
@@ -164,26 +319,32 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Project Solutions</h2>
+                <p class="section-subtitle">Tap a project to open it live</p>
             </div>
 
             <div class="projects-grid">
-                <div class="project-card">
+                <!-- Clickable: opens the live SmartRenter site in a new tab -->
+                <a class="project-card is-link"
+                   href="https://smartrenter-one.vercel.app"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Open SmartRenter, live site (opens in a new tab)">
                     <div class="project-image">
-                        <img src="images/gallery/8.webp" alt="Mindbridge">
+                        <img src="images/gallery/8.JPG" alt="SmartRenter website preview">
+                        <span class="project-badge"><i class="fas fa-circle"></i> Live</span>
                     </div>
                     <div class="project-content">
-                 
                         <h3>SmartRenter</h3>
                         <p>Property management platform for landlords and tenants. Built with user experience and efficiency in mind.</p>
+                        <span class="project-cta">Visit live site <i class="fas fa-arrow-up-right-from-square"></i></span>
                     </div>
-                </div>
+                </a>
 
+                <!-- No public URL yet: shown as a card, not a link. Add href + class "is-link" when it has one. -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="images/gallery/lab.webp" alt="Mzuri Organics">
+                        <img src="images/gallery/lab.webp" alt="Cyberbyte cybersecurity lab">
                     </div>
                     <div class="project-content">
-               
                         <h3>Cyberbyte</h3>
                         <p>Full-fledged cybersecurity lab for training and penetration testing. Equipped with the latest tools and technologies.</p>
                     </div>
@@ -299,7 +460,6 @@
             <div class="contact-grid">
                 <div class="contact-info">
                     <h2>Connect Directly</h2>
-                 
 
                     <div class="info-items">
                         <div class="info-item">
@@ -366,7 +526,7 @@
                         <i class="fas fa-code"></i>
                         <span>MARUBI-LABS</span>
                     </a>
-              
+
                     <div class="social-links">
                         <a href="https://github.com/Marubi23" target="_blank" class="social-link">
                             <i class="fab fa-github"></i>
@@ -423,33 +583,16 @@
     </button>
 
     <!-- JavaScript -->
-    <script src="js/main.js?v=20260910"></script>
-    <script src="js/animations.js?v=20260910"></script>
+    <script src="js/main.js?v=20261021"></script>
+    <script src="js/animations.js?v=20261021"></script>
+
+    <!-- Last-resort loader kill switch (in case main.js fails to load) -->
     <script>
-        // Terminal typing effect
-        const typingReviews = [
-            "Cybersecurity for your business",
-            "AI & Machine Learning solutions",
-            "Cloud Infrastructure that scales with your business",
-           
-        ];
-        let reviewIdx = 0;
-        const typingEl = document.getElementById('typingReview');
-
-        function typeReview() {
-            if (typingEl) {
-                typingEl.style.opacity = '0';
-                setTimeout(() => {
-                    typingEl.textContent = typingReviews[reviewIdx];
-                    typingEl.style.opacity = '1';
-                    reviewIdx = (reviewIdx + 1) % typingReviews.length;
-                }, 500);
-            }
-        }
-
-        if (typingEl) {
-            setInterval(typeReview, 3000);
-        }
+      setTimeout(function () {
+        document.documentElement.classList.remove('is-loading');
+        var l = document.getElementById('site-loader');
+        if (l) l.remove();
+      }, 6000);
     </script>
 </body>
 </html>
