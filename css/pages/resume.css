@@ -662,8 +662,8 @@
     }
 
     .block-content.show {
-        max-height: 600px;
-        overflow-y: auto;
+        max-height: 2600px;      /* was 600px: longer sections (Experience) no longer scroll inside a tiny box */
+        overflow: visible;
     }
 
     .contact-list,
@@ -711,4 +711,224 @@
 @keyframes slideIn {
     from { transform: scaleX(0); }
     to { transform: scaleX(1); }
+}
+
+/* ============================================================
+   UI POLISH (matches the homepage: ember, glass, flowing gradients)
+   ============================================================ */
+@keyframes resumeFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ----- main card: clearer glass ----- */
+.resume-container {
+    background: linear-gradient(160deg, rgba(48, 45, 45, .55), rgba(24, 23, 23, .5));
+    border-radius: 28px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+.resume-container::before {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--marubi-ember), var(--marubi-ember-light), var(--marubi-ember), transparent);
+    background-size: 200% 100%;
+    animation: resumeFlow 7s ease-in-out infinite;
+}
+
+/* ----- profile ----- */
+.profile-image { box-shadow: 0 0 0 6px rgba(204, 47, 1, .12), var(--shadow-ember); }
+.profile-name .last { letter-spacing: .04em; }
+.profile-title { letter-spacing: .08em; }
+.profile-badge {
+    color: #fff;
+    border: 0;
+    background: linear-gradient(120deg, var(--marubi-ember), var(--marubi-ember-light), #ff7a55, var(--marubi-ember));
+    background-size: 220% 100%;
+    animation: resumeFlow 7s ease-in-out infinite;
+    box-shadow: 0 8px 22px rgba(204, 47, 1, .35);
+}
+
+/* ----- section titles (desktop): gradient underline ----- */
+@media (min-width: 769px) {
+    .resume-block { margin-bottom: 2.2rem; }
+    .block-title {
+        font-family: 'Clash Display', 'Inter', sans-serif;
+        letter-spacing: .02em;
+        border-bottom: 0;
+        padding-bottom: .7rem;
+        background: linear-gradient(90deg, rgba(204, 47, 1, .7), rgba(204, 47, 1, .05) 75%) bottom / 100% 1px no-repeat;
+    }
+}
+
+/* ----- summary ----- */
+.summary-text { font-size: 1rem; line-height: 1.85; background: rgba(0, 0, 0, .25); }
+
+/* ----- certifications: long names wrap neatly ----- */
+.cert-item { align-items: flex-start; line-height: 1.4; }
+.cert-item i { margin-top: .15rem; flex: none; }
+
+/* ----- experience: timeline dots + date pills ----- */
+.exp-item { position: relative; padding-left: 1.4rem; margin-bottom: 2.2rem; }
+.exp-item::before {
+    content: '';
+    position: absolute; left: -7px; top: .45rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--marubi-ember);
+    box-shadow: 0 0 0 4px rgba(204, 47, 1, .18), 0 0 14px rgba(204, 47, 1, .6);
+}
+.exp-header { gap: .4rem .8rem; }
+.exp-header h3 { font-size: 1.15rem; line-height: 1.3; }
+.exp-date {
+    padding: .2rem .7rem; border-radius: 999px;
+    background: rgba(204, 47, 1, .12); border: 1px solid rgba(204, 47, 1, .3);
+    white-space: nowrap;
+}
+.exp-list li { margin-bottom: .45rem; }
+.exp-tech span { transition: background-color .25s, transform .25s; }
+.exp-tech span:hover { background: rgba(204, 47, 1, .3); transform: translateY(-2px); }
+
+/* ----- featured projects: glass cards + status colours ----- */
+.project-mini-card {
+    display: flex; flex-direction: column; align-items: flex-start;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .05), rgba(0, 0, 0, .25));
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.project-mini-card:hover { box-shadow: 0 14px 34px rgba(204, 47, 1, .22); }
+.project-mini-card p { flex: 1; line-height: 1.5; }
+.project-status {
+    display: inline-flex; align-items: center; gap: .4rem;
+    padding: .25rem .65rem; border-radius: 999px; font-weight: 600; letter-spacing: .03em;
+}
+.project-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.project-status.is-live    { color: #3ddc84; background: rgba(61, 220, 132, .12); }
+.project-status.is-ongoing { color: #ffbd2e; background: rgba(255, 189, 46, .12); }
+.project-status.is-event   { color: #8ab4ff; background: rgba(138, 180, 255, .12); }
+.project-status.is-dev     { color: rgba(255, 255, 255, .7); background: rgba(255, 255, 255, .08); }
+.project-status.is-live::before { animation: resumePulse 1.8s ease-in-out infinite; }
+@keyframes resumePulse { 50% { opacity: .3; transform: scale(.7); } }
+
+/* ----- achievements ----- */
+.achievement-item { transition: transform .3s ease, border-color .3s ease, background-color .3s ease; }
+.achievement-item:hover { transform: translateX(6px); border-color: rgba(204, 47, 1, .5); background: rgba(204, 47, 1, .07); }
+
+/* ----- skills ----- */
+.skill-tag { line-height: 1.3; }
+.skill-tag:hover { background: linear-gradient(120deg, var(--marubi-ember), var(--marubi-ember-light)); }
+.skill-mini { transition: background-color .25s, transform .25s; }
+.skill-mini:hover { background: rgba(204, 47, 1, .3); transform: translateY(-2px); }
+
+/* ----- language bars ----- */
+.fill { background: linear-gradient(90deg, var(--marubi-ember), var(--marubi-ember-light), #ff7a55); }
+
+/* ----- phones ----- */
+@media (max-width: 768px) {
+    .exp-item::before { display: none; }                 /* dots would be clipped inside the accordion */
+    .exp-item { padding-left: .75rem !important; }
+    .exp-header h3 { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .resume-container::before, .profile-badge, .project-status.is-live::before { animation: none !important; }
+}
+
+
+/* ============================================================
+   MOBILE ACCORDION: plus icons, clear dropdowns
+   ============================================================ */
+@media (max-width: 768px) {
+    .resume-block {
+        margin-bottom: .7rem !important;
+        border-radius: 14px !important;
+        background: rgba(255, 255, 255, .02);
+        transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    .resume-block:has(> .block-title.active) {
+        border-color: rgba(204, 47, 1, .55) !important;
+        box-shadow: 0 12px 32px rgba(204, 47, 1, .16);
+    }
+
+    /* the bar you tap */
+    .block-title {
+        min-height: 56px;
+        padding: .9rem 3.6rem .9rem 1rem !important;
+        font-size: 1rem !important;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transition: background-color .3s ease !important;
+    }
+    .block-title:active { background: rgba(204, 47, 1, .18) !important; }
+    .block-title.active { background: rgba(204, 47, 1, .16) !important; }
+    .block-title:focus-visible { outline: 2px solid var(--marubi-ember-light); outline-offset: -2px; }
+
+    /* plus -> turns into an x when open. Drawn in pure CSS, so it never depends on an icon font. */
+    .block-title::after {
+        content: '';
+        right: .9rem;
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(204, 47, 1, .75);
+        background: rgba(204, 47, 1, .1);
+        font-family: inherit;
+        transform: translateY(-50%);
+        transition: background-color .3s ease, border-color .3s ease;
+    }
+    .block-title::before {
+        content: '';
+        position: absolute;
+        right: .9rem; top: 50%;
+        width: 32px; height: 32px;
+        pointer-events: none;
+        color: var(--marubi-ember-light);
+        background:
+            linear-gradient(currentColor, currentColor) center / 12px 2px no-repeat,
+            linear-gradient(currentColor, currentColor) center / 2px 12px no-repeat;
+        transform: translateY(-50%);
+        transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), color .3s ease;
+        z-index: 1;
+    }
+    .block-title.active::after {
+        transform: translateY(-50%);
+        background: var(--marubi-ember);
+        border-color: var(--marubi-ember);
+    }
+    .block-title.active::before {
+        transform: translateY(-50%) rotate(45deg);
+        color: #fff;
+    }
+
+    /* the dropdown: smooth, never clipped */
+    .block-content {
+        overflow: hidden;                       /* never spills over the next section while opening */
+        transition: max-height .45s cubic-bezier(.4, 0, .2, 1), padding .45s cubic-bezier(.4, 0, .2, 1);
+        background: rgba(0, 0, 0, .25);
+    }
+    .block-content.show { max-height: none; overflow: hidden; }
+
+    /* closed = truly closed: the old padding rules otherwise leave a visible sliver of content */
+    .resume-block .block-content:not(.show) {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        border-top-width: 0;
+        border-bottom-width: 0;
+    }
+
+    /* readable content inside every section */
+    .contact-item { font-size: .95rem; gap: .6rem; align-items: flex-start; }
+    .contact-item span, .contact-item a { min-width: 0; overflow-wrap: anywhere; }
+    .contact-item i { flex: none; width: 24px; margin-top: .15rem; }
+    .edu-item h3 { font-size: 1.05rem; }
+    .cert-item { font-size: .95rem; }
+    .skill-mini { font-size: .85rem; padding: .35rem .85rem; }
+    .skill-tag { font-size: .88rem; }
+    .summary-text { font-size: .97rem; line-height: 1.8; }
+    .exp-item + .exp-item {
+        margin-top: .8rem !important;
+        padding-top: 1.1rem !important;
+        border-top: 1px dashed rgba(204, 47, 1, .3);
+    }
+    .exp-list { font-size: .93rem; margin-left: 1.1rem; }
+    .exp-tech span { font-size: .78rem; }
+    .project-mini-card p, .achievement-item p { font-size: .9rem; line-height: 1.5; }
+    .achievement-item { padding: .85rem; }
+    .lang-bar span { width: 70px; }
 }

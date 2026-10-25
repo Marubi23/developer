@@ -3,139 +3,120 @@
  * RESUME PAGE FUNCTIONALITY
  * CLEAN VERSION - Just the resume, no extra backgrounds
  * Author: Felix Marubi
+ *
+ * Notes:
+ *  - The mobile accordion (plus/minus dropdowns) is owned by
+ *    resume-accordion.js. This file only handles PDF/HTML export,
+ *    button loading states, and back-to-top.
+ *  - PDF export calls window.resumeOpenAllBlocks() before capture
+ *    so hidden sections never get chopped out of the PDF.
  * ============================================
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('🚀 Resume page initialized');
-    
-    // Initialize mobile accordion
-    initMobileAccordion();
-    
-    // Initialize download buttons
+
     initDownloadButtons();
-    
-    // Initialize back to top
     initBackToTop();
 });
 
 /**
- * Mobile Accordion Functionality
+ * Swap a button into a loading state. Returns a restore function.
+ * Uses the button element passed in, not the deprecated global `event`.
  */
-function initMobileAccordion() {
-    if (window.innerWidth > 768) return;
-    
-    const blockTitles = document.querySelectorAll('.block-title');
-    
-    blockTitles.forEach(title => {
-        const block = title.closest('.resume-block');
-        const content = block.querySelector('.block-content');
-        
-        if (!content) return;
-        
-        content.classList.remove('show');
-        
-        title.addEventListener('click', function(e) {
-            e.preventDefault();
-            this.classList.toggle('active');
-            content.classList.toggle('show');
-        });
-    });
+function setButtonLoading(btn, html) {
+    if (!btn) return function () {};
+    const original = btn.innerHTML;
+    btn.innerHTML = html;
+    btn.disabled = true;
+    return function () {
+        btn.innerHTML = original;
+        btn.disabled = false;
+    };
 }
 
 /**
- * Download PDF Function - CLEAN VERSION
+ * Download PDF — expands every accordion section first so nothing
+ * is clipped, captures the resume container, then restores the
+ * user's open/closed state.
  */
-function downloadPDF() {
+function downloadPDF(event) {
     const element = document.getElementById('resume-content');
-    
     if (!element) {
         alert('Resume content not found');
         return;
     }
-    
-    // Show loading state
-    const btn = event?.target?.closest('button');
-    if (btn) {
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
-        btn.disabled = true;
+
+    const btn = event?.currentTarget || event?.target?.closest?.('button') || null;
+    const restoreBtn = setButtonLoading(
+        btn,
+        '<i class="fas fa-spinner fa-spin"></i> Generating PDF...'
+    );
+
+    // Open all sections so the PDF shows every block.
+    if (typeof window.resumeOpenAllBlocks === 'function') {
+        window.resumeOpenAllBlocks();
     }
-    
-    // Expand all sections for PDF
-    const hiddenContents = document.querySelectorAll('.block-content');
-    hiddenContents.forEach(el => {
-        el.style.maxHeight = 'none';
-        el.style.overflow = 'visible';
-    });
-    
-    // Simple PDF options - just make it fit, no extra styling
+
     const opt = {
-        margin:        [0.3, 0.3, 0.3, 0.3],
-        filename:      'Felix_Marubi_Resume.pdf',
-        image:         { type: 'jpeg', quality: 0.98 },
-        html2canvas:   { 
+        margin: [0.3, 0.3, 0.3, 0.3],
+        filename: 'Felix_Marubi_Resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
             scale: 1.2,
-            backgroundColor: null // Let it use original colors
+            backgroundColor: null,
         },
-        jsPDF:         { 
-            unit: 'in', 
-            format: 'a4', 
-            orientation: 'portrait'
-        }
+        jsPDF: {
+            unit: 'in',
+            format: 'a4',
+            orientation: 'portrait',
+        },
     };
-    
-    // Generate PDF directly - no extra styling, just the resume as-is
-    html2pdf().set(opt).from(element).save()
-        .then(() => {
+
+    html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(function () {
             console.log('PDF generated');
-            
-            // Restore original state
-            hiddenContents.forEach(el => {
-                el.style.maxHeight = '';
-                el.style.overflow = '';
-            });
-            
-            if (btn) {
-                btn.innerHTML = '<i class="fas fa-file-pdf"></i> Download PDF';
-                btn.disabled = false;
+            restoreBtn();
+            if (typeof window.resumeRestoreBlocks === 'function') {
+                window.resumeRestoreBlocks();
             }
         })
-        .catch(error => {
+        .catch(function (error) {
             console.error('PDF error:', error);
             alert('Error generating PDF. Please try again.');
-            
-            hiddenContents.forEach(el => {
-                el.style.maxHeight = '';
-                el.style.overflow = '';
-            });
-            
-            if (btn) {
-                btn.innerHTML = '<i class="fas fa-file-pdf"></i> Download PDF';
-                btn.disabled = false;
+            restoreBtn();
+            if (typeof window.resumeRestoreBlocks === 'function') {
+                window.resumeRestoreBlocks();
             }
         });
 }
 
 /**
- * Download HTML Function - CLEAN VERSION
+ * Download HTML — bundles the resume markup into a standalone file.
+ * Also opens all sections first so the standalone copy isn't empty.
  */
-function downloadHTML() {
+function downloadHTML(event) {
     const element = document.getElementById('resume-content');
-    
     if (!element) {
         alert('Resume content not found');
         return;
     }
-    
-    const btn = event?.target?.closest('button');
-    if (btn) {
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating HTML...';
-        btn.disabled = true;
+
+    const btn = event?.currentTarget || event?.target?.closest?.('button') || null;
+    const restoreBtn = setButtonLoading(
+        btn,
+        '<i class="fas fa-spinner fa-spin"></i> Generating HTML...'
+    );
+
+    if (typeof window.resumeOpenAllBlocks === 'function') {
+        window.resumeOpenAllBlocks();
     }
-    
+
     const contentHTML = element.outerHTML;
-    
-    // Simple HTML - just the resume, no extra backgrounds
+
     const fullHTML = `<!DOCTYPE html>
 <html>
 <head>
@@ -154,7 +135,7 @@ function downloadHTML() {
     </div>
 </body>
 </html>`;
-    
+
     const blob = new Blob([fullHTML], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -164,43 +145,47 @@ function downloadHTML() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    
-    if (btn) {
-        setTimeout(() => {
-            btn.innerHTML = '<i class="fas fa-code"></i> Download Web Version';
-            btn.disabled = false;
-        }, 1000);
-    }
+
+    // Restore after a beat so the user sees the loading state finish
+    setTimeout(function () {
+        restoreBtn();
+        if (typeof window.resumeRestoreBlocks === 'function') {
+            window.resumeRestoreBlocks();
+        }
+    }, 800);
 }
 
 /**
- * Initialize Download Buttons
+ * Wire up the four download buttons (top + bottom pairs).
  */
 function initDownloadButtons() {
     const pdfButtons = document.querySelectorAll('#downloadPDFBtn, #downloadPDFBtn2');
-    pdfButtons.forEach(btn => {
+    pdfButtons.forEach(function (btn) {
         btn.addEventListener('click', downloadPDF);
     });
-    
+
     const htmlButtons = document.querySelectorAll('#downloadHTMLBtn, #downloadHTMLBtn2');
-    htmlButtons.forEach(btn => {
+    htmlButtons.forEach(function (btn) {
         btn.addEventListener('click', downloadHTML);
     });
 }
 
 /**
- * Initialize Back to Top Button
+ * Back to top button.
  */
 function initBackToTop() {
     const backToTop = document.getElementById('backToTop');
-    
     if (!backToTop) return;
-    
-    window.addEventListener('scroll', () => {
-        backToTop.classList.toggle('visible', window.scrollY > 400);
-    });
-    
-    backToTop.addEventListener('click', () => {
+
+    window.addEventListener(
+        'scroll',
+        function () {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        },
+        { passive: true }
+    );
+
+    backToTop.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
